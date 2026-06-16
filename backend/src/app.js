@@ -15,6 +15,8 @@ const admissionRoutes = require('./routes/admissions');
 const documentRoutes = require('./routes/documents');
 const adminRoutes = require('./routes/admin');
 const reportRoutes = require('./routes/reports');
+const scholarshipRoutes = require("./routes/scholarships");
+
 
 const app = express();
 
@@ -25,14 +27,20 @@ if (!fs.existsSync(uploadDir)) {
 
 app.use(
   helmet({
-    crossOriginResourcePolicy: false
+    crossOriginResourcePolicy: { policy: "cross-origin" }
   })
 );
+
 app.use(morgan('tiny'));
 app.use(express.json({ limit: '15mb' }));
 app.use(express.urlencoded({ extended: true, limit: '15mb' }));
 app.use(cookieParser());
 app.use(cors({ origin: process.env.FRONTEND_URL || 'http://localhost:5173', credentials: true }));
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "http://localhost:5173");
+  res.header("Access-Control-Allow-Credentials", "true");
+  next();
+});
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -50,13 +58,18 @@ app.use(
       res.setHeader('Access-Control-Allow-Origin', '*');
     }
   })
-);app.use('/api/auth', authRoutes);
+);
+app.use('/api/auth', authRoutes);
 app.use('/api/students', studentRoutes);
 app.use('/api/admissions', admissionRoutes);
 app.use('/api/documents', documentRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/reports', reportRoutes);
+app.use("/api/analytics", require("./routes/analytics"));
+app.use("/api/scholarships",require("./routes/scholarships"));
+app.use("/api/scholarships", scholarshipRoutes);
 
 app.use(errorHandler);
+
 
 module.exports = app;

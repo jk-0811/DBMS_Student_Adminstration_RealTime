@@ -71,7 +71,19 @@ password: Student@1234
 
 SELECT COUNT(*) FROM "Student";
 
+
 # Check AdmissionForm table
 
-
 SELECT COUNT(*) FROM "AdmissionForm";
+
+
+# Updated process
+
+UPDATE "UploadedDocument"
+SET verified = true;
+
+
+# for verification process
+
+SELECT id, "documentType", verified
+FROM "UploadedDocument";

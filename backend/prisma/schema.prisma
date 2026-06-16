@@ -8,87 +8,88 @@ datasource db {
 }
 
 model Student {
-  id                  Int                 @id @default(autoincrement())
-  fullName            String
-  email               String              @unique
-  mobile              String
-  passwordHash        String
-  role                String              @default("student")
-  emailVerified       Boolean             @default(false)
-  verificationToken   String?             @db.Text
-  passwordResetToken  String?             @db.Text
+  id                   Int       @id @default(autoincrement())
+  fullName             String
+  email                String    @unique
+  mobile               String
+  passwordHash         String
+  role                 String    @default("student")
+  emailVerified        Boolean   @default(false)
+  verificationToken    String?   @db.Text
+  passwordResetToken   String?   @db.Text
   passwordResetExpires DateTime?
-  profileCompleted    Boolean             @default(false)
-  dob                 String?
-  gender              String?
-  bloodGroup          String?
-  nationality         String?
-  religion            String?
-  category            String?
-  address             String?
-  guardianName        String?
-  guardianOccupation  String?
-  guardianIncome      String?
-  emergencyContact    String?
-  createdAt           DateTime            @default(now())
-  updatedAt           DateTime            @updatedAt
+  profileCompleted     Boolean   @default(false)
+  dob                  String?
+  gender               String?
+  bloodGroup           String?
+  nationality          String?
+  religion             String?
+  category             String?
+  address              String?
+  guardianName         String?
+  guardianOccupation   String?
+  guardianIncome       String?
+  emergencyContact     String?
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
 
-  academicDetails     AcademicDetail?
-  admissionForm       AdmissionForm?
-  uploadedDocuments   UploadedDocument[]
-  admissionStatus     AdmissionStatus?
-  notifications       Notification[]
+  academicDetails   AcademicDetail?
+  admissionForm     AdmissionForm?
+  uploadedDocuments UploadedDocument[]
+  admissionStatus   AdmissionStatus?
+  notifications     Notification[]
+  scholarships      StudentScholarship[]
 }
 
 model AcademicDetail {
-  id                  Int      @id @default(autoincrement())
-  studentId           Int      @unique
-  secondarySchool     String?
-  secondaryBoard      String?
-  secondaryPercentage Float?
-  secondaryYear       Int?
-  intermediateCollege String?
-  intermediateBoard   String?
+  id                     Int      @id @default(autoincrement())
+  studentId              Int      @unique
+  secondarySchool        String?
+  secondaryBoard         String?
+  secondaryPercentage    Float?
+  secondaryYear          Int?
+  intermediateCollege    String?
+  intermediateBoard      String?
   intermediatePercentage Float?
-  intermediateYear    Int?
-  examName            String?
-  examRank            String?
-  examScore           String?
-  examYear            Int?
-  updatedAt           DateTime @updatedAt
+  intermediateYear       Int?
+  examName               String?
+  examRank               String?
+  examScore              String?
+  examYear               Int?
+  updatedAt              DateTime @updatedAt
 
-  student             Student  @relation(fields: [studentId], references: [id])
+  student Student @relation(fields: [studentId], references: [id])
 }
 
 model AdmissionForm {
-  id                  Int      @id @default(autoincrement())
-  studentId           Int      @unique
+  id                  Int       @id @default(autoincrement())
+  studentId           Int       @unique
   course              String
   branch              String
   admissionCategory   String
-  hostelRequired      Boolean  @default(false)
-  scholarshipRequired Boolean  @default(false)
+  hostelRequired      Boolean   @default(false)
+  scholarshipRequired Boolean   @default(false)
   previousInstitution String?
   declarationAccepted Boolean
-  draft               Boolean  @default(true)
+  draft               Boolean   @default(true)
   submittedAt         DateTime?
-  status              String   @default("draft")
-  updatedAt           DateTime @updatedAt
+  status              String    @default("draft")
+  updatedAt           DateTime  @updatedAt
 
-  student             Student  @relation(fields: [studentId], references: [id])
+  student Student @relation(fields: [studentId], references: [id])
 }
 
 model UploadedDocument {
-  id                 Int      @id @default(autoincrement())
-  studentId          Int
-  documentType       String
-  fileName           String
-  filePath           String
-  verified           Boolean  @default(false)
-  verificationNotes  String?
-  createdAt          DateTime @default(now())
+  id                Int      @id @default(autoincrement())
+  studentId         Int
+  documentType      String
+  fileName          String
+  filePath          String
+  verified          Boolean  @default(false)
+  verificationNotes String?
+  createdAt         DateTime @default(now())
 
-  student            Student  @relation(fields: [studentId], references: [id])
+  student Student @relation(fields: [studentId], references: [id])
 }
 
 model AdmissionStatus {
@@ -99,7 +100,7 @@ model AdmissionStatus {
   auditNotes        String?
   updatedAt         DateTime @updatedAt
 
-  student           Student  @relation(fields: [studentId], references: [id])
+  student Student @relation(fields: [studentId], references: [id])
 }
 
 model Admin {
@@ -113,22 +114,60 @@ model Admin {
 }
 
 model Notification {
-  id         Int      @id @default(autoincrement())
-  studentId  Int
-  title      String
-  message    String
-  read       Boolean  @default(false)
-  metadata   Json?
-  createdAt  DateTime @default(now())
+  id        Int      @id @default(autoincrement())
+  studentId Int
+  title     String
+  message   String
+  read      Boolean  @default(false)
+  metadata  Json?
+  createdAt DateTime @default(now())
 
-  student    Student  @relation(fields: [studentId], references: [id])
+  student Student @relation(fields: [studentId], references: [id])
 }
 
 model AuditLog {
-  id         Int      @id @default(autoincrement())
-  actorId    Int?
-  action     String
-  target     String
-  details    String?
-  createdAt  DateTime @default(now())
+  id        Int      @id @default(autoincrement())
+  actorId   Int?
+  action    String
+  target    String
+  details   String?
+  createdAt DateTime @default(now())
+}
+
+model Scholarship {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String
+  amount      Float
+  eligibility String
+  deadline    DateTime
+  createdAt   DateTime @default(now())
+
+  students StudentScholarship[]
+}
+
+model StudentScholarship {
+  id            Int    @id @default(autoincrement())
+  studentId     Int
+  scholarshipId Int
+  status        String @default("pending")
+
+  student     Student     @relation(fields: [studentId], references: [id])
+  scholarship Scholarship @relation(fields: [scholarshipId], references: [id])
+
+  @@unique([studentId, scholarshipId])
+}
+
+model AdmissionLetter {
+  id          Int      @id @default(autoincrement())
+  studentId   Int
+  filePath    String
+  generatedAt DateTime @default(now())
+}
+
+model StudentQR {
+  id          Int      @id @default(autoincrement())
+  studentId   Int      @unique
+  qrCode      String
+  createdAt   DateTime @default(now())
 }

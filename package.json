@@ -12,6 +12,12 @@
     "seed": "npm --workspace backend run seed"
   },
   "devDependencies": {
+    "@rollup/rollup-win32-x64-msvc": "^4.62.0",
     "concurrently": "^8.2.0"
+  },
+  "dependencies": {
+    "jspdf": "^4.2.1",
+    "qrcode.react": "^4.2.0",
+    "recharts": "^3.8.1"
   }
 }

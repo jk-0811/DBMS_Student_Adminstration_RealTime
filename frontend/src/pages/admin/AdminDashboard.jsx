@@ -1,8 +1,28 @@
 import { useEffect, useState } from 'react';
 import api from '../../api/api';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
-
+import {BarChart,Bar,XAxis,YAxis,Tooltip,ResponsiveContainer,PieChart,Pie,Cell} from "recharts";
 const colors = ['#2563EB', '#7C3AED', '#06B6D4', '#22C55E', '#F59E0B', '#EF4444'];
+
+const DashboardChart = ({ data }) => {
+
+  const chartData = data?.branches?.map(item => ({
+    branch: item.branch,
+    students: item._count
+  })) || [];
+
+  return (
+    <ResponsiveContainer width="100%" height={300}>
+      <BarChart data={chartData}>
+        <XAxis dataKey="branch" />
+        <YAxis />
+        <Tooltip />
+        <Bar dataKey="students" />
+      </BarChart>
+    </ResponsiveContainer>
+  );
+};
+
+
 
 export default function AdminDashboard() {
   const [summary, setSummary] = useState(null);
