@@ -44,4 +44,23 @@ router.get('/admissions/pdf', requireAuth, requireRole('admin'), async (req, res
   }
 });
 
+router.get("/students-csv", async(req,res)=>{
+
+ const students =
+ await prisma.student.findMany();
+
+ const parser = new Parser();
+
+ const csv = parser.parse(students);
+
+ res.header(
+   "Content-Type",
+   "text/csv"
+ );
+
+ res.attachment("students.csv");
+
+ return res.send(csv);
+});
+
 module.exports = router;

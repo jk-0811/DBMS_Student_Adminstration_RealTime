@@ -100,7 +100,7 @@ router.get('/applications', requireAuth, requireRole('admin'), async (req, res, 
   try {
     const { search, branch, status, category, fromDate, toDate, page = 1, limit = 20 } = req.query;
     const where = {
-      OR: search ? [{ fullName: { contains: search, mode: 'insensitive' } }, { email: { contains: search, mode: 'insensitive' } }, { mobile: { contains: search, mode: 'insensitive' } }] : undefined,
+      OR: search ? [{fullName:{contains:search,mode:"insensitive" }},{email:{contains:search,mode:"insensitive" }},{mobile:{contains:search,mode:"insensitive" }},{id:isNaN(search)? undefined: Number(search)} ] : undefined,
       admissionForm: branch ? { branch } : undefined,
       admissionStatus: status ? { applicationStatus: status } : undefined,
       category: category || undefined,
@@ -403,6 +403,47 @@ router.put('/applications/:id', requireAuth, requireRole('admin'), async (req, r
   }
 });
 
+router.get(
+ "/search",
+ requireAuth,
+ requireRole("admin"),
+ async(req,res)=>{
+
+ const {q}=req.query;
+
+ const students=
+ await prisma.student.findMany({
+
+  where:{
+   OR:[
+    {
+     fullName:{
+      contains:q,
+      mode:"insensitive"
+     }
+    },
+    {
+     email:{
+      contains:q,
+      mode:"insensitive"
+     }
+    },
+    {
+     mobile:{
+      contains:q
+     }
+    }
+   ]
+  }
+
+ });
+
+ res.json({
+  success:true,
+  students
+ });
+});
+
 router.delete('/applications/:id', requireAuth, requireRole('admin'), async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -438,3 +479,5 @@ router.get('/activity', requireAuth, requireRole('admin'), async (req, res, next
 });
 
 module.exports = router;
+
+

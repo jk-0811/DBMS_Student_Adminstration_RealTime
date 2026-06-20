@@ -10,28 +10,32 @@ export default function Login() {
   const navigate = useNavigate();
   const { login } = useAuth();
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    setError(null);
-    setValidationErrors([]);
-    try {
-      await login(form);
-      // Navigate to root - App.jsx will redirect based on role
-      navigate('/');
-    } catch (err) {
-      if (err.errors && Array.isArray(err.errors)) {
-        const errorMessages = err.errors.map(e => `${e.path.join('.')}: ${e.message}`).join(', ');
-        setValidationErrors(err.errors);
-        setError(errorMessages);
-      } else if (err.error) {
-        setError(err.error);
-      } else if (err.message) {
-        setError(err.message);
-      } else {
-        setError('Login failed. Please check your credentials and try again.');
-      }
+ const handleSubmit = async (event) => {
+
+  event.preventDefault();
+
+  setError(null);
+
+  try {
+
+    const user =await login(form);
+
+    if(user.role === "admin"){
+      navigate("/admin/dashboard");
+    }else{
+      navigate("/student/dashboard");
     }
-  };
+
+  } catch(err){
+
+    setError(
+      err.response?.data?.error ||
+      "Login failed"
+    );
+
+  }
+
+};  
 
   return (
     <div className="flex min-h-screen items-center justify-center px-4 py-10">

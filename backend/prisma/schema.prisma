@@ -80,14 +80,14 @@ model AdmissionForm {
 }
 
 model UploadedDocument {
-  id                Int      @id @default(autoincrement())
-  studentId         Int
-  documentType      String
-  fileName          String
-  filePath          String
-  verified          Boolean  @default(false)
-  verificationNotes String?
-  createdAt         DateTime @default(now())
+  id                 Int      @id @default(autoincrement())
+  studentId          Int
+  documentType       String
+  fileName           String
+  filePath           String
+  verificationStatus String   @default("pending")
+  verificationNotes  String?
+  createdAt          DateTime @default(now())
 
   student Student @relation(fields: [studentId], references: [id])
 }
@@ -119,19 +119,9 @@ model Notification {
   title     String
   message   String
   read      Boolean  @default(false)
-  metadata  Json?
   createdAt DateTime @default(now())
 
   student Student @relation(fields: [studentId], references: [id])
-}
-
-model AuditLog {
-  id        Int      @id @default(autoincrement())
-  actorId   Int?
-  action    String
-  target    String
-  details   String?
-  createdAt DateTime @default(now())
 }
 
 model Scholarship {
@@ -166,8 +156,17 @@ model AdmissionLetter {
 }
 
 model StudentQR {
+  id        Int      @id @default(autoincrement())
+  studentId Int      @unique
+  qrCode    String
+  createdAt DateTime @default(now())
+}
+
+model ActivityLog {
   id          Int      @id @default(autoincrement())
-  studentId   Int      @unique
-  qrCode      String
+  action      String
+  performedBy Int?
+  studentId   Int?
+  details     String?
   createdAt   DateTime @default(now())
 }

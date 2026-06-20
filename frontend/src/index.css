@@ -13,23 +13,20 @@ html {
 }
 
 body {
-  margin: 0;
-  min-height: 100vh;
-  background: radial-gradient(circle at top, rgba(37,99,235,0.08), transparent 35%), #f8fafc;
+ transition: all 0.3s ease;
 }
 
-button, input, textarea, select {
-  font: inherit;
+.dark {
+ background: #111827;
+ color: white;
 }
 
-::selection {
-  background: rgba(37,99,235,0.18);
+.dark .card {
+ background: #1f2937;
+ color: white;
 }
 
-.card-glass {
-  @apply bg-white/90 backdrop-blur-xl border border-slate-200/70 shadow-glass;
-}
-
-.dark .card-glass {
-  @apply bg-slate-900/80 border-slate-700/60;
+.dark .table {
+ background: #1f2937;
+ color: white;
 }

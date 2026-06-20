@@ -13,16 +13,16 @@ export default function Scholarships() {
 
   const applyScholarship = async(id) => {
 
-    const studentId =
-      localStorage.getItem("studentId");
+   const user =
+ JSON.parse(
+  localStorage.getItem("sams_user")
+ );
 
-    await api.post("/scholarships/apply",{
-      studentId,
-      scholarshipId:id
-    });
-
-    alert("Applied Successfully");
-  };
+const studentId = user.id;
+await api.post("/scholarships/apply",{
+  studentId:user.id,
+  scholarshipId:id
+});
 
   return (
     <div className="space-y-6">
@@ -57,4 +57,4 @@ export default function Scholarships() {
 
     </div>
   );
-}
+}}

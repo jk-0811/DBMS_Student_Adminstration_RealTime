@@ -16,7 +16,7 @@ const documentRoutes = require('./routes/documents');
 const adminRoutes = require('./routes/admin');
 const reportRoutes = require('./routes/reports');
 const scholarshipRoutes = require("./routes/scholarships");
-
+const notificationRoutes =require("./routes/notifications");
 
 const app = express();
 
@@ -51,14 +51,9 @@ const limiter = rateLimit({
 });
 
 app.use(limiter);
-app.use(
-  '/uploads',
-  express.static(uploadDir, {
-    setHeaders: (res) => {
-      res.setHeader('Access-Control-Allow-Origin', '*');
-    }
-  })
-);
+app.use('/uploads',express.static(uploadDir, {
+    setHeaders: (res) => {res.setHeader('Access-Control-Allow-Origin', '*');}
+}));
 app.use('/api/auth', authRoutes);
 app.use('/api/students', studentRoutes);
 app.use('/api/admissions', admissionRoutes);
@@ -66,9 +61,7 @@ app.use('/api/documents', documentRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/reports', reportRoutes);
 app.use("/api/analytics", require("./routes/analytics"));
-app.use("/api/scholarships",require("./routes/scholarships"));
-app.use("/api/scholarships", scholarshipRoutes);
-
+app.use("/api/notifications",notificationRoutes);
 app.use(errorHandler);
 
 
