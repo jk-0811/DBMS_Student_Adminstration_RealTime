@@ -61,8 +61,25 @@ export default function Documents() {
   };
 
   return (
-    <div className="space-y-6">
-      <section className="card-glass p-8 rounded-3xl border-slate-200">
+    <div
+    className="min-h-screen p-6 space-y-6 animate-fadeIn"
+    style={{
+      backgroundImage: `
+        linear-gradient(
+          rgba(15, 23, 42, 0.55),
+          rgba(15, 23, 42, 0.55)
+        ),
+        url('https://jntugv.edu.in/static/media/JNTU_PIC.ae61eebb7dc963f0dd30.png')
+      `,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      backgroundAttachment: "fixed",
+      backgroundRepeat: "no-repeat"
+    }}
+  >
+   
+      <section className="card-glass p-8 rounded-3xl border border-white/30 shadow-2xl animate-slideUp">
+
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
             <h2 className="text-2xl font-semibold">Document Vault</h2>

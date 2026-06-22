@@ -1,11 +1,13 @@
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
   color-scheme: light;
-  font-family: 'Inter', 'Poppins', ui-sans-serif, system-ui, sans-serif;
-  background-color: #f8fafc;
+  font-family: 'Poppins', sans-serif;
 }
 
 html {
@@ -13,20 +15,339 @@ html {
 }
 
 body {
- transition: all 0.3s ease;
+  margin: 0;
+  min-height: 100vh;
+
+  background:
+    linear-gradient(
+      rgba(255,255,255,0.88),
+      rgba(255,255,255,0.88)
+    ),
+    url("https://jntugv.edu.in/static/media/JNTU_PIC.ae61eebb7dc963f0dd30.png");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  color: #1e293b;
+  transition: all 0.3s ease;
 }
 
+/* Scrollbar */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #38bdf8;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #e0f2fe;
+}
+
+/* Glass Card */
+
+.card-glass {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  border: 1px solid rgba(255,255,255,0.4);
+
+  border-radius: 24px;
+
+  box-shadow:
+    0 8px 32px rgba(0,0,0,0.12);
+
+  animation: fadeUp 0.8s ease;
+}
+
+/* Dashboard Cards */
+
+.card {
+  background: white;
+
+  border-radius: 20px;
+
+  padding: 20px;
+
+  border: 1px solid #dbeafe;
+
+  box-shadow:
+    0 4px 20px rgba(0,0,0,0.08);
+
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+
+  box-shadow:
+    0 12px 30px rgba(14,165,233,0.18);
+}
+
+/* Inputs */
+
+input,
+select,
+textarea {
+  transition: all 0.3s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  box-shadow: 0 0 0 4px rgba(56,189,248,0.2);
+}
+
+/* Tables */
+
+.table {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+/* Headings */
+
+h1 {
+  color: #0284c7;
+  font-weight: 700;
+}
+
+h2 {
+  color: #0369a1;
+  font-weight: 600;
+}
+
+h3 {
+  color: #075985;
+}
+
+/* Buttons */
+
+.btn-primary {
+  background: linear-gradient(
+    135deg,
+    #38bdf8,
+    #0ea5e9
+  );
+
+  color: white;
+
+  border: none;
+
+  padding: 12px 24px;
+
+  border-radius: 12px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 20px rgba(14,165,233,0.3);
+}
+
+/* Page Title Animation */
+
+.page-title {
+  animation: fadeDown 1s ease;
+}
+
+/* Floating Animation */
+
+.float {
+  animation: floating 4s ease-in-out infinite;
+}
+
+/* Fade Up Animation */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade Down */
+
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Floating */
+
+@keyframes floating {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* Dark Mode */
+
 .dark {
- background: #111827;
- color: white;
+  background:
+    linear-gradient(
+      rgba(15,23,42,0.92),
+      rgba(15,23,42,0.92)
+    ),
+    url("https://jntugv.edu.in/static/media/JNTU_PIC.ae61eebb7dc963f0dd30.png");
+
+  background-size: cover;
+  background-position: center;
+
+  color: white;
 }
 
 .dark .card {
- background: #1f2937;
- color: white;
+  background: #1e293b;
+  color: white;
+  border-color: #334155;
 }
 
 .dark .table {
- background: #1f2937;
- color: white;
+  background: #1e293b;
+  color: white;
 }
+
+.dark .card-glass {
+  background: rgba(30,41,59,0.85);
+  color: white;
+}
+
+.dark h1,
+.dark h2,
+.dark h3 {
+  color: #7dd3fc;
+}
+
+/* Fade Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 1s ease;
+}
+
+/* Slide Up Animation */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slideUp {
+  animation: slideUp 0.8s ease;
+}
+
+/* Glass Effect */
+.card-glass {
+  background: rgba(255,255,255,0.88);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.4);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+
+  background:
+    linear-gradient(
+      rgba(255,255,255,0.90),
+      rgba(255,255,255,0.90)
+    ),
+    url("https://jntugv.edu.in/static/media/JNTU_PIC.ae61eebb7dc963f0dd30.png");
+
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+
+  color: #1e293b;
+}
+.card-glass {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.4);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+
+.card-glass:hover {
+  transform: translateY(-5px);
+  transition: 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slideUp {
+  animation: slideUp 0.8s ease;
+}
+

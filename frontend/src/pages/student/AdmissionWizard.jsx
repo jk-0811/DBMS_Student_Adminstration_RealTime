@@ -34,13 +34,19 @@ export default function AdmissionWizard() {
   };
 
   return (
-    <div className="space-y-6">
-      <div className="card-glass p-8 rounded-3xl border-slate-200/70 dark:border-slate-700/70">
-        <h2 className="text-2xl font-semibold">Admission </h2>
-        <p className="mt-2 text-slate-500 dark:text-slate-400">Complete the multi-step form to submit your admission application.</p>
+    <div
+  className="min-h-screen p-8 bg-cover bg-center bg-fixed"
+  style={{
+    backgroundImage:
+      "linear-gradient(rgba(240,248,255,0.92), rgba(240,248,255,0.92)), url('https://jntugv.edu.in/static/media/JNTU_PIC.ae61eebb7dc963f0dd30.png')"
+  }}
+>
+      <div className="fade-up bg-white/90 backdrop-blur-xl p-10 rounded-3xl shadow-2xl border border-sky-100">
+        <h2 className="text-4xl font-bold text-sky-700">Admission </h2>
+        <p className="mt-3 text-slate-600 text-lg dark:text-slate-400">Complete the multi-step form to submit your admission application.</p>
         <div className="mt-8 grid gap-4 md:grid-cols-3">
           {steps.map((step, idx) => (
-            <div key={step} className={`rounded-3xl border p-4 text-center ${idx === currentStep ? 'border-brand-500 bg-brand-50 text-brand-700' : 'border-slate-200 bg-white text-slate-600 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300'}`}>
+            <div key={step} className={`float-card rounded-3xl p-6 text-center shadow-lg transition-all duration-300 hover:scale-105${idx === currentStep ? 'border-brand-500 bg-brand-50 text-brand-700' : 'border-slate-200 bg-white text-slate-600 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300'}`}>
               <div className="text-sm uppercase tracking-[0.2em]">Step {idx + 1}</div>
               <div className="mt-2 text-base font-semibold">{step}</div>
             </div>
@@ -70,7 +76,7 @@ export default function AdmissionWizard() {
             </label>
           ))}
           <div className="md:col-span-2 flex justify-between gap-4">
-            <button onClick={nextStep} className="w-full rounded-3xl border border-slate-300 px-5 py-3 text-slate-700 transition hover:bg-slate-100 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800">Skip</button>
+            <button onClick={nextStep} className="w-full rounded-xl border border-slate-300 px-5 py-3 text-slate-700 transition hover:bg-slate-100 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800">Skip</button>
             <button onClick={handleAcademicSave} className="w-full rounded-3xl bg-brand-600 px-5 py-3 text-white transition hover:bg-brand-700">Save and continue</button>
           </div>
         </div>

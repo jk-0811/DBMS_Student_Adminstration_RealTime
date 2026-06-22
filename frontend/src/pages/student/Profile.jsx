@@ -35,7 +35,22 @@ export default function StudentProfile() {
   }
 
   return (
-    <div className="space-y-6">
+    <div
+    className="min-h-screen p-6 space-y-6 animate-fadeIn"
+    style={{
+      backgroundImage: `
+        linear-gradient(
+          rgba(15, 23, 42, 0.55),
+          rgba(15, 23, 42, 0.55)
+        ),
+        url('https://jntugv.edu.in/static/media/JNTU_PIC.ae61eebb7dc963f0dd30.png')
+      `,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      backgroundAttachment: "fixed",
+      backgroundRepeat: "no-repeat"
+    }}
+  >
 
       {/* QR Code Section */}
       <div className="card-glass rounded-3xl border border-slate-200/70 bg-white p-8 shadow-lg dark:border-slate-700/70 dark:bg-slate-900">
