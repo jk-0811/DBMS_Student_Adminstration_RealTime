@@ -16,12 +16,85 @@ export default function StudentDashboard() {
       .catch(console.error);
   }, []);
 
-  return (
-    <div className="space-y-6">
+  return (    
+  <div
+    className="min-h-screen p-6 space-y-6 animate-fadeIn"
+    style={{
+      backgroundImage: `
+        linear-gradient(
+          rgba(15, 23, 42, 0.55),
+          rgba(15, 23, 42, 0.55)
+        ),
+        url('https://jntugv.edu.in/static/media/JNTU_PIC.ae61eebb7dc963f0dd30.png')
+      `,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      backgroundAttachment: "fixed",
+      backgroundRepeat: "no-repeat"
+    }}
+  >
 
+    {/* Welcome Banner */}
+    <div className="card-glass rounded-3xl p-8 text-center animate-slideUp">
+
+      <h1 className="text-4xl font-bold text-sky-700">
+        Welcome to SAMS Portal
+      </h1>
+
+      <p className="mt-3 text-slate-600 text-lg">
+        Student Admission Management System
+      </p>
+
+      <p className="text-slate-500 mt-2">
+        Track your application, upload documents and monitor admission progress.
+      </p>
+
+    </div>
+    {/* Feature Cards */}
+
+<div className="grid md:grid-cols-3 gap-6">
+
+  <div className="card-glass p-6 rounded-3xl text-center animate-slideUp">
+
+    <h3 className="text-xl font-bold text-sky-700">
+      Upload Documents
+    </h3>
+
+    <p className="mt-2 text-slate-500">
+      Submit required admission documents.
+    </p>
+
+  </div>
+
+  <div className="card-glass p-6 rounded-3xl text-center animate-slideUp">
+
+    <h3 className="text-xl font-bold text-green-700">
+      Check Status
+    </h3>
+
+    <p className="mt-2 text-slate-500">
+      Monitor application verification.
+    </p>
+
+  </div>
+
+  <div className="card-glass p-6 rounded-3xl text-center animate-slideUp">
+
+    <h3 className="text-xl font-bold text-purple-700">
+      Notifications
+    </h3>
+
+    <p className="mt-2 text-slate-500">
+      View latest admission updates.
+    </p>
+
+  </div>
+
+</div>
+    
       {/* Student Profile Card */}
-      <div className="card-glass p-6 rounded-3xl border-slate-200/70 dark:border-slate-700/70">
-        <div className="flex flex-col md:flex-row items-center gap-6">
+      <div className="card-glass p-6 rounded-3xl border-slate-200/70  dark:border-slate-700/70">
+        <div className="flex flex-col md:flex-row items-center gap-8">
           <div style={{ width: "150px", height: "150px" }}>
   <img
     src={
@@ -34,8 +107,9 @@ export default function StudentDashboard() {
       width: "150px",
       height: "150px",
       objectFit: "cover",
-      border: "5px solid #2563eb",
-      borderRadius: "50%"
+      border: "6px solid #38bdf8",
+      borderRadius: "50%",
+      boxShadow: "0px 0px 25px rgba(14,165,233,0.5)"
     }}
     onLoad={() => console.log("IMAGE LOADED")}
     onError={(e) => {
@@ -141,7 +215,7 @@ export default function StudentDashboard() {
         {card.title}
       </h3>
 
-      <p className="mt-3 text-3xl font-semibold">
+      <p className="mt-3 text-4xl font-bold text-sky-700">
         {card.value}
       </p>
     </div>

@@ -197,6 +197,13 @@ export default function ApplicationsPage() {
     );
   };
   return (
+    <div
+  className="min-h-screen bg-cover bg-center bg-no-repeat"
+  style={{
+    backgroundImage:
+      "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR93UVLl0SKUJ7MXGXTVTQFJEgq6VXZofQIOw&s')"
+  }}
+>
     <div className="space-y-6">
       {/* Header and Controls */}
       <div className="card-glass p-6 rounded-3xl border-slate-200/70 dark:border-slate-700/70">
@@ -1071,6 +1078,7 @@ export default function ApplicationsPage() {
           </div>
         </div>
       )}
+    </div>
     </div>
   );
 }
