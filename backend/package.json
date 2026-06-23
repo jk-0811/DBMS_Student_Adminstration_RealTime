@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon --watch src --exec node src/server.js",
     "start": "node src/server.js",
-    "seed": "node src/seed.js"
+    "seed": "node src/seed.js",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@prisma/client": "^5.15.0",
