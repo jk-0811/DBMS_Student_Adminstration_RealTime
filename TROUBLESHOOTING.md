@@ -165,7 +165,7 @@ If NO → Check browser console for errors (F12)
 
 **Issue 1**: Backend not running
 ```
-❌ Cannot connect to http://localhost:4000
+❌ Cannot connect to http://localhost:5000
 ✅ Solution: Start backend server
 ```
 
@@ -307,7 +307,7 @@ If NO → Check browser console for errors (F12)
 ## 🧪 Verification Checklist
 
 ### Before Testing:
-- [ ] Backend running on http://localhost:4000
+- [ ] Backend running on http://localhost:5000
 - [ ] Frontend running on http://localhost:5173
 - [ ] Database connected (check .env DATABASE_URL)
 - [ ] Email config has placeholder values (for dev mode)
@@ -340,7 +340,7 @@ If NO → Check browser console for errors (F12)
 ### Check if backend is running:
 ```bash
 # In terminal where backend is running
-# Should show "Server running on http://localhost:4000"
+# Should show "Server running on http://localhost:5000"
 # Should show "Connected to database"
 ```
 
@@ -354,7 +354,7 @@ If NO → Check browser console for errors (F12)
 ### Test API from terminal:
 ```bash
 # Register test
-curl -X POST http://localhost:4000/api/auth/register \
+curl -X POST http://localhost:5000/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{
     "fullName": "Test User",
@@ -365,7 +365,7 @@ curl -X POST http://localhost:4000/api/auth/register \
   }'
 
 # Login test
-curl -X POST http://localhost:4000/api/auth/login \
+curl -X POST http://localhost:5000/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{
     "email": "test@example.com",

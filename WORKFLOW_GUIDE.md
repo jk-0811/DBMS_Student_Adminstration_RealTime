@@ -10,7 +10,7 @@ This is a Student Admission Management System (SAMS) with two user types:
 ## 🚀 QUICK START - TEST THE ENTIRE WORKFLOW
 
 ### Prerequisites
-✅ Backend running on `http://localhost:4000`
+✅ Backend running on `http://localhost:5000`
 ✅ Frontend running on `http://localhost:5173`
 ✅ Database connected (PostgreSQL via Supabase)
 

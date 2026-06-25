@@ -87,3 +87,8 @@ SET verified = true;
 
 SELECT id, "documentType", verified
 FROM "UploadedDocument";
+
+# for updation process
+UPDATE "UploadedDocument"
+SET "verificationStatus" = 'approved'
+WHERE id = 1;

@@ -7,7 +7,7 @@
 # Terminal 1: Backend
 cd backend
 npm start
-# Should show: Server running on http://localhost:4000
+# Should show: Server running on http://localhost:5000
 
 # Terminal 2: Frontend  
 cd frontend

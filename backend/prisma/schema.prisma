@@ -87,8 +87,6 @@ model UploadedDocument {
   filePath           String
   verificationStatus String   @default("pending")
   verificationNotes  String?
-  createdAt          DateTime @default(now())
-
   student Student @relation(fields: [studentId], references: [id])
 }
 
