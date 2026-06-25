@@ -70,6 +70,7 @@ app.use('/api/admin', adminRoutes);
 app.use('/api/reports', reportRoutes);
 app.use("/api/analytics", require("./routes/analytics"));
 app.use("/api/notifications",notificationRoutes);
+app.use("/api/scholarships", scholarshipRoutes);
 app.use(errorHandler);
 
 
