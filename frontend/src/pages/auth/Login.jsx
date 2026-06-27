@@ -138,7 +138,7 @@ return (
 
         <div className="bg-white rounded-2xl p-6 shadow-lg text-center">
           <h2 className="text-4xl font-bold text-green-600">
-            150+
+            10
           </h2>
           <p className="text-slate-600 mt-2">
             Courses
@@ -147,7 +147,7 @@ return (
 
         <div className="bg-white rounded-2xl p-6 shadow-lg text-center">
           <h2 className="text-4xl font-bold text-purple-600">
-            98%
+            88%
           </h2>
           <p className="text-slate-600 mt-2">
             Placement Rate
@@ -329,7 +329,7 @@ return (
             <h3 className="font-semibold">
               Phone
             </h3>
-            <p>+91 9876543210</p>
+            <p>+91 6301594486</p>
           </div>
 
           <div>

@@ -39,6 +39,7 @@ model Student {
   admissionStatus   AdmissionStatus?
   notifications     Notification[]
   scholarships      StudentScholarship[]
+  achievements Achievement[]
 }
 
 model AcademicDetail {
@@ -139,10 +140,8 @@ model StudentScholarship {
   studentId     Int
   scholarshipId Int
   status        String @default("pending")
-
   student     Student     @relation(fields: [studentId], references: [id])
   scholarship Scholarship @relation(fields: [scholarshipId], references: [id])
-
   @@unique([studentId, scholarshipId])
 }
 
@@ -167,4 +166,16 @@ model ActivityLog {
   studentId   Int?
   details     String?
   createdAt   DateTime @default(now())
+}
+
+model Achievement {
+  id          Int      @id @default(autoincrement())
+  studentId   Int
+  type        String   // "Sports" or "Academic"
+  title       String
+  description String?
+  level       String?  // College / State / National / International
+  certificate String?  // uploaded file path
+  createdAt   DateTime @default(now())
+  student Student @relation(fields: [studentId], references: [id])
 }

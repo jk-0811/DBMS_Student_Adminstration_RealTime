@@ -1,17 +1,7 @@
 import { useEffect, useState } from 'react';
 import api from '../../api/api';
-import { motion } from 'framer-motion';
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  Tooltip,
-  ResponsiveContainer,
-  PieChart,
-  Pie,
-  Cell
-} from 'recharts';
+import {BarChart,Bar,XAxis,YAxis,Tooltip,ResponsiveContainer,PieChart,Pie,Cell} from 'recharts';
+import {FaUserGraduate,FaClipboardList,FaClock,FaCheckCircle,FaTimesCircle,FaGraduationCap,FaTrophy,FaFilePdf} from "react-icons/fa";
 const colors = [
   '#60A5FA',
   '#A78BFA',
@@ -41,22 +31,24 @@ const DashboardChart = ({ data }) => {
 };
 
 
-
 export default function AdminDashboard() {
+
   const [summary, setSummary] = useState(null);
+  const [academicCertificates, setAcademicCertificates] = useState([]);
+  const [sportsCertificates, setSportsCertificates] = useState([]);
 
   useEffect(() => {
-  api.get('/admin/dashboard')
-    .then((res) => {
-      console.log("DASHBOARD RESPONSE:");
-      console.log(res.data);
-      setSummary(res.data);
-    })
-    .catch((err) => {
-      console.log("DASHBOARD ERROR:");
-      console.log(err);
-    });
-}, []);
+    api.get("/admin/dashboard")
+      .then((res) => {
+        setSummary(res.data);
+        setAcademicCertificates(res.data.academicCertificates);
+        setSportsCertificates(res.data.sportsCertificates);
+      })
+      .catch(console.error);
+
+
+  }, []);
+
 
 return (
   <div
@@ -67,8 +59,7 @@ return (
           rgba(0,0,12,0.45),
           rgba(0,0,12,0.55)
         ),
-        url('https://jntugv.edu.in/static/media/JNTU_PIC.ae61eebb7dc963f0dd30.png')
-      `,
+        url('https://jntugv.edu.in/static/media/JNTU_PIC.ae61eebb7dc963f0dd30.png') `,
       backgroundSize: 'cover',
       backgroundPosition: 'center'
     }}
@@ -93,42 +84,52 @@ shadow-lg
 hover:scale-105
 hover:shadow-xl
 transition-all
-duration-300"
-      >
-        Download Student Report CSV
+duration-300">
+<div className="flex items-center gap-2">
+<FaFilePdf/>
+<span>
+Download Student Report CSV
+</span>
+</div>
       </a>
     </div>
       <section className="grid gap-6 sm:grid-cols-2 xl:grid-cols-5">
-        {[
-           {
-    label: 'Total Students',
-    value: summary?.summary?.totalStudents || 0,
-    color: 'from-sky-400 to-blue-500'
-  },
-  {
-    label: 'Applications Received',
-    value: summary?.summary?.applicationsReceived || 0,
-    color: 'from-cyan-400 to-sky-500'
-  },
-  {
-    label: 'Pending Verification',
-    value: summary?.summary?.pendingVerification || 0,
-    color: 'from-amber-300 to-orange-400'
-  },
-  {
-    label: 'Approved',
-    value: summary?.summary?.approved || 0,
-    color: 'from-emerald-400 to-green-500'
-  },
-  {
-    label: 'Rejected',
-    value: summary?.summary?.rejected || 0,
-    color: 'from-rose-400 to-pink-500'
-  }
-        ].map((item) => (
-          <div key={item.label} className="
-bg-white/75
-backdrop-blur-md
+{[
+{
+label:"Total Students",
+value:summary?.summary?.totalStudents || 0,
+icon:<FaUserGraduate className="text-blue-600 text-3xl"/>,
+},
+
+{
+label:"Applications Received",
+value:summary?.summary?.applicationsReceived || 0,
+icon:<FaClipboardList className="text-purple-600 text-3xl"/>,
+},
+
+{
+label:"Pending Verification",
+value:summary?.summary?.pendingVerification || 0,
+icon:<FaClock className="text-yellow-500 text-3xl"/>,
+},
+
+{
+label:"Approved",
+value:summary?.summary?.approved || 0,
+icon:<FaCheckCircle className="text-green-500 text-3xl"/>,
+},
+
+{
+label:"Rejected",
+value:summary?.summary?.rejected || 0,
+icon:<FaTimesCircle className="text-red-500 text-3xl"/>,
+},
+
+].map(item=>(
+
+<div key={item.label} className="
+bg-white/90 
+backdrop-blur-xl
 rounded-3xl
 p-6
 shadow-xl
@@ -137,23 +138,38 @@ border-white/40
 hover:shadow-2xl
 hover:-translate-y-1
 transition-all
-duration-300
-">
-            <p className="text-sm uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">{item.label}</p>
-            <p className="mt-4 text-3xl font-semibold text-slate-900 dark:text-slate-100">{item.value}</p>
+duration-300">
+
+ <div className="flex justify-between items-center">
+
+<div>
+
+<p className="text-sm uppercase tracking-widest text-gray-500">
+
+{item.label}
+
+</p>
+
+<p className="text-4xl font-bold mt-4">
+
+{item.value}
+
+</p>
+
+</div>
+
+<div>
+
+{item.icon}
+
+</div>
+
+</div>
           </div>
         ))}
       </section>
       <section className="grid gap-6 lg:grid-cols-[1.4fr_0.8fr]">
-        <div className="
-    bg-white/75
-    backdrop-blur-md
-    rounded-3xl
-    p-6
-    shadow-xl
-    border
-    border-white/40
-  ">
+        <div className="bg-white/75 backdrop-blur-md rounded-3xl p-6 shadow-xl border border-white/40">
           <h2 className="text-xl font-semibold">Admissions by Branch</h2>
           <div className="mt-6 h-72">
             <ResponsiveContainer width="100%" height="100%">
@@ -206,6 +222,194 @@ duration-300
         </div>
       </section>
     </div>
-    </div>
-  );
-}
+    
+
+
+
+<div className="flex items-center gap-2 mt-10 mb-6">
+  <FaTrophy className="text-yellow-500" />
+  <h2 className="text-2xl font-bold">
+    Academic Certificates
+  </h2>
+</div>
+
+<table className="w-full overflow-hidden rounded-2xl bg-white/80 backdrop-blur-md">
+
+  <thead>
+    <tr className="border-b">
+      <th className="text-left p-4">Student</th>
+      <th className="text-center p-4">Certificate</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    {academicCertificates.length > 0 ? (
+
+      academicCertificates.map((doc) => (
+
+        <tr
+          key={doc.id}
+          className="border-b hover:bg-blue-50 transition"
+        >
+
+          <td className="p-4">
+
+            <div className="flex items-center gap-3">
+
+              <div className="w-11 h-11 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 text-white font-bold flex items-center justify-center">
+
+                {doc.student?.fullName?.charAt(0)}
+
+              </div>
+
+              <div>
+
+                <p className="font-semibold">
+                  {doc.student?.fullName}
+                </p>
+
+                <p className="text-xs text-gray-500">
+                  {doc.student?.email}
+                </p>
+
+              </div>
+
+            </div>
+
+          </td>
+
+          <td className="text-center p-4">
+
+            <a
+              href={`http://localhost:5000${doc.filePath}`}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center justify-center w-10 h-10 rounded-xl border hover:bg-gray-100 transition"
+            >
+
+              <FaFilePdf className="text-red-600 text-xl" />
+
+            </a>
+
+          </td>
+
+        </tr>
+
+      ))
+
+    ) : (
+
+      <tr>
+
+        <td
+          colSpan="2"
+          className="text-center py-8 text-gray-500"
+        >
+          No Academic Certificates Uploaded
+        </td>
+
+      </tr>
+
+    )}
+
+  </tbody>
+
+</table>
+
+
+<div className="flex items-center gap-2 mt-10 mb-6">
+  <FaTrophy className="text-yellow-500" />
+  <h2 className="text-2xl font-bold">
+    Sports Certificates
+  </h2>
+</div>
+
+<table className="w-full overflow-hidden rounded-2xl bg-white/80 backdrop-blur-md">
+
+  <thead>
+    <tr className="border-b">
+      <th className="text-left p-4">Student</th>
+      <th className="text-center p-4">Certificate</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    {sportsCertificates.length > 0 ? (
+
+      sportsCertificates.map((doc) => (
+
+        <tr
+          key={doc.id}
+          className="border-b hover:bg-blue-50 transition"
+        >
+
+          <td className="p-4">
+
+            <div className="flex items-center gap-3">
+
+              <div className="w-11 h-11 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 text-white font-bold flex items-center justify-center">
+
+                {doc.student?.fullName?.charAt(0)}
+
+              </div>
+
+              <div>
+
+                <p className="font-semibold">
+                  {doc.student?.fullName}
+                </p>
+
+                <p className="text-xs text-gray-500">
+                  {doc.student?.email}
+                </p>
+
+              </div>
+
+            </div>
+
+          </td>
+
+          <td className="text-center p-4">
+
+            <a
+              href={`http://localhost:5000${doc.filePath}`}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center justify-center w-10 h-10 rounded-xl border hover:bg-gray-100 transition"
+            >
+
+              <FaFilePdf className="text-red-600 text-xl" />
+
+            </a>
+
+          </td>
+
+        </tr>
+
+      ))
+
+    ) : (
+
+      <tr>
+
+        <td
+          colSpan="2"
+          className="text-center py-8 text-gray-500"
+        >
+          No Sports Certificates Uploaded
+        </td>
+
+      </tr>
+
+    )}
+
+  </tbody>
+
+</table>
+
+
+
+</div>
+); }

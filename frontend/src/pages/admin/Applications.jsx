@@ -238,8 +238,10 @@ export default function ApplicationsPage() {
             <option value="">All Branches</option>
             <option value="Computer Science">Computer Science</option>
             <option value="Information Technology">Information Technology</option>
-            <option value="Electronics">Electronics</option>
-            <option value="Mechanical">Mechanical</option>
+            <option value="ECE">Electronics</option>
+            <option value="Mec">Mechanical</option>
+            <option value="EEE">EEE</option>
+            <option value="MET">Meturagy</option>
             <option value="Civil">Civil</option>
           </select>
           <select
@@ -247,7 +249,7 @@ export default function ApplicationsPage() {
             onChange={(e) => setFilters({ ...filters, status: e.target.value })}
             className="rounded-3xl border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-700 outline-none shadow-sm transition focus:border-brand-500 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200"
           >
-            <option value="">All Statuses</option>
+            <option value="">All Status</option>
             <option value="draft">Draft</option>
             <option value="submitted">Submitted</option>
             <option value="under-review">Under Review</option>
@@ -905,6 +907,10 @@ export default function ApplicationsPage() {
                       className="mt-2 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-700 outline-none focus:border-brand-500 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200"
                     >
                       <option value="B.Tech">B.Tech</option>
+                      <option value="B.Tech"> 1st B.Tech</option>
+                      <option value="B.Tech">2nd B.Tech</option>
+                      <option value="B.Tech">3rd B.Tech</option>
+                      <option value="B.Tech">4th B.Tech</option>
                       <option value="M.Tech">M.Tech</option>
                       <option value="MBA">MBA</option>
                       <option value="MCA">MCA</option>

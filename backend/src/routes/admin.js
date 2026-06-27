@@ -73,6 +73,38 @@ const categoryDistribution = await prisma.$queryRaw`
   ORDER BY count DESC
 `;
 
+const academicCertificates = await prisma.uploadedDocument.findMany({
+  where: {
+    documentType: "academicCertificate"
+  },
+  include: {
+    student: {
+      include: {
+        admissionForm: true
+      }
+    }
+  },
+  orderBy: {
+    id: "desc"
+  }
+});
+
+const sportsCertificates = await prisma.uploadedDocument.findMany({
+  where: {
+    documentType: "sportsCertificate"
+  },
+  include: {
+    student: {
+      include: {
+        admissionForm: true
+      }
+    }
+  },
+  orderBy: {
+    id: "desc"
+  }
+});
+
 res.json({
   success: true,
   summary: {
@@ -88,7 +120,9 @@ res.json({
     branchDistribution,
     monthlyRegistrations,
     categoryDistribution
-  }
+  },
+  academicCertificates,
+  sportsCertificates
 });
     
   } catch (error) {

@@ -17,6 +17,7 @@ const adminRoutes = require('./routes/admin');
 const reportRoutes = require('./routes/reports');
 const scholarshipRoutes = require("./routes/scholarships");
 const notificationRoutes =require("./routes/notifications");
+const achievementRoutes =require("./routes/achievements");
 
 const app = express();
 
@@ -71,6 +72,7 @@ app.use('/api/reports', reportRoutes);
 app.use("/api/analytics", require("./routes/analytics"));
 app.use("/api/notifications",notificationRoutes);
 app.use("/api/scholarships", scholarshipRoutes);
+app.use("/api/achievements", achievementRoutes);
 app.use(errorHandler);
 
 
