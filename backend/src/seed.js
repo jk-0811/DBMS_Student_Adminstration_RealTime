@@ -17,23 +17,25 @@ async function seed() {
   });
 
   const student = await prisma.student.upsert({
-    where: { email: 'student1@sams.edu' },
-    update: {
-      passwordHash: await bcrypt.hash('Student@1234', 12),
-      role: 'student',
-      emailVerified: true
-    },
-    create: {
-      fullName: 'Tejaswiniprakash',
-      email: 'student1@sams.edu',
-      mobile: '6301594486',
-      passwordHash: await bcrypt.hash('Student@1234', 12),
-      role: 'student',
-      emailVerified: true,
-      profileCompleted: true,
-      category: 'General'
-    }
-  });
+  where: { email: 'student1@sams.edu' },
+  update: {
+    passwordHash: await bcrypt.hash('Student@1234', 12),
+    role: 'student',
+    emailVerified: true,
+    rollNo: '23VV1A1264' // 👈 ADD THIS LINE HERE to update the existing account
+  },
+  create: {
+    fullName: 'Tejaswiniprakash',
+    email: 'student1@sams.edu',
+    mobile: '6301594486',
+    passwordHash: await bcrypt.hash('Student@1234', 12),
+    role: 'student',
+    emailVerified: true,
+    profileCompleted: true,
+    category: 'General',
+    rollNo: '23VV1A1264' // 👈 Keep it here too
+  }
+});
 
   await prisma.admissionForm.upsert({
     where: { studentId: student.id },

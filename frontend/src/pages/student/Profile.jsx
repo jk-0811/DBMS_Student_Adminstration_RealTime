@@ -132,8 +132,8 @@ export default function StudentProfile() {
               value: student?.gender
             },
             {
-              label: "Category",
-              value: student?.category
+              label: "Roll",
+              value: student?.roll
             },
             {
               label: "Nationality",
@@ -160,8 +160,8 @@ export default function StudentProfile() {
               value: student?.guardianOccupation
             },
             {
-              label: "Guardian Income",
-              value: student?.guardianIncome
+              label: "Category",
+              value: student?.category
             },
             {
               label: "Emergency Contact",

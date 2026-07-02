@@ -121,13 +121,24 @@ export default function StudentDashboard() {
 </div>
 
           <div className="flex-1">
-            <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
-              {stats?.fullName || 'Student'}
-            </h2>
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
+                  {stats?.fullName || 'Student'}
+                </h2>
 
-            <p className="text-slate-500 mt-1">
-              {stats?.email}
-            </p>
+                <p className="text-slate-500 mt-1">
+                  {stats?.email}
+                </p>
+              </div>
+
+              <div className="ml-6 text-right">
+                <p className="text-sm text-slate-500">Roll No.</p>
+                <p className="text-5xl font-extrabold text-sky-700">
+                  {stats?.roll || '—'}
+                </p>
+              </div>
+            </div>
 
             <div className="grid md:grid-cols-2 gap-4 mt-4">
               <div>
